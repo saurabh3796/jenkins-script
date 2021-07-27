@@ -1,0 +1,9 @@
+openssl pkcs12 -export -out jenkins.p12 \
+-passout 'pass:password123' -inkey server.key \
+-in server.crt -certfile ca.crt -name test.domain.com
+
+keytool -importkeystore -srckeystore jenkins.p12 \
+-srcstorepass 'password123' -srcstoretype PKCS12 \
+-srcalias test.domain.com -deststoretype JKS \
+-destkeystore jenkins.jks -deststorepass 'password123' \
+-destalias test.domain.com
